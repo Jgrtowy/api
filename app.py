@@ -7,12 +7,12 @@ app = Flask(__name__)
 limiter = Limiter(app)
 CORS(app)
 
-# @app.route('/')
-# def index():
-#     return redirect(url_for('static', filename='index.html'))
-
 @app.route('/', methods=['GET'])
 def index():
+     return redirect(url_for('static', filename='index.html'))
+
+@app.route('/status', methods=['GET'])
+def status():
      return jsonify("🎉 API is working!")
 
 @app.route('/rcon', methods=['POST'])
@@ -40,4 +40,4 @@ def handle_rcon_command():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=os.getenv("PORT", default=5000))
+    app.run(debug=True, port=5000)
