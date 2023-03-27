@@ -1,12 +1,18 @@
 from flask import Flask, request, jsonify, redirect, url_for
 from mctools import RCONClient
-from flask_cors import CORS
 from flask_limiter import Limiter
 
 
 app = Flask(__name__)
 limiter = Limiter(app)
-CORS(app)
+
+@app.after_request
+def add_cors_headers(response):
+    # replace '*' with the domains you want to allow
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
 
 @app.route('/')
 def index():
