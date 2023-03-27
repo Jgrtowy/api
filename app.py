@@ -3,14 +3,17 @@ from mctools import RCONClient
 from flask_limiter import Limiter
 from flask_cors import CORS
 
-
 app = Flask(__name__)
 limiter = Limiter(app)
 CORS(app)
 
-@app.route('/')
+# @app.route('/')
+# def index():
+#     return redirect(url_for('static', filename='index.html'))
+
+@app.route('/', methods=['GET'])
 def index():
-    return redirect(url_for('static', filename='index.html'))
+     return jsonify("🎉 API is working!")
 
 @app.route('/rcon', methods=['POST'])
 @limiter.limit("100/minute")
@@ -34,9 +37,7 @@ def handle_rcon_command():
 
     return jsonify(response)
 
-@app.route('/status', methods=['GET'])
-def apiTest():
-     return jsonify("🎉 API is working!")
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
