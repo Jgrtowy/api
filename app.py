@@ -1,8 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect, url_for
 from mctools import RCONClient
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:5173"])
+
+@app.route('/')
+def index():
+    return redirect(url_for('static', filename='index.html'))
 
 @app.route('/rcon', methods=['POST'])
 def handle_rcon_command():
