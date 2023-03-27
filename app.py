@@ -1,14 +1,19 @@
 from flask import Flask, request, jsonify, redirect, url_for
 from mctools import RCONClient
 from flask_cors import CORS
+from flask_limiter import Limiter
+
+
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+limiter = Limiter(app)
+CORS(app)
 
 @app.route('/')
 def index():
     return redirect(url_for('static', filename='index.html'))
 
 @app.route('/rcon', methods=['POST'])
+@limiter.limit("100/minute")
 def handle_rcon_command():
     ip = request.json['ip']
     port = request.json['port']
