@@ -1,5 +1,5 @@
 import express from "express"
-import { Rcon } from "rcon-client/lib"
+import { Rcon } from "rcon-client"
 const router = express.Router()
 
 router.post("/", async (req, res) => {
