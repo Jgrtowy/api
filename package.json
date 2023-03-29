@@ -2,7 +2,7 @@
      "name": "jgrtowyapi",
      "version": "1.0.0",
      "description": "My attempt to make own API.\r Using flask and python.",
-     "main": "index.js",
+     "main": "index.ts",
      "type": "module",
      "scripts": {
           "start": "nodemon index.ts",

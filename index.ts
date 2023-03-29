@@ -17,9 +17,9 @@ const limiter = rateLimit({
 })
 app.use(limiter)
 
-import rcon from "./routes/rcon"
-import root from "./routes/root"
-import status from "./routes/status"
+import rcon from "./routes/rcon.js"
+import root from "./routes/root.js"
+import status from "./routes/status.js"
 app.use("/", root)
 app.use("/status", status)
 app.use("/rcon", rcon)
