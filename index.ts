@@ -20,8 +20,10 @@ app.use(limiter)
 import rcon from "./routes/rcon.js"
 import root from "./routes/root.js"
 import status from "./routes/status.js"
+import netlify from "./routes/netlify.js"
 app.use("/", root)
 app.use("/status", status)
 app.use("/rcon", rcon)
+app.use("/netlify", netlify)
 
 app.listen(process.env.PORT || 5000)
