@@ -3,6 +3,8 @@ import { MessageBuilder, Webhook } from 'discord-webhook-node';
 import { config } from 'dotenv';
 import express from 'express';
 import { sendErrorWebhook } from '../lib/errorWebhook.js';
+import eventSwitch from '../lib/eventSwitch.js';
+import { sendPayload } from '../lib/sendPayload.js';
 const router = express.Router();
 config();
 
@@ -20,83 +22,13 @@ const sendWebhook = async (payload: any, headers: any) => {
         const { repository, sender } = payload;
         const action = headers['x-github-event'];
 
-        let actionText = '';
-        let actionEmoji = '';
-        switch (action) {
-            case 'star':
-                if (payload.action === 'deleted') {
-                    actionText = 'unstarred';
-                    actionEmoji = '🚫⭐';
-                    break;
-                }
-                actionText = 'starred';
-                actionEmoji = '⭐';
-                break;
-            case 'create':
-                actionText = 'created';
-                actionEmoji = '📝';
-                break;
-            case 'delete':
-                actionText = 'deleted';
-                actionEmoji = '🗑️';
-                break;
-            case 'fork':
-                actionText = 'forked';
-                actionEmoji = '🍴';
-                break;
-            case 'push':
-                actionText = 'pushed to';
-                actionEmoji = '📤';
-                break;
-            case 'pull_request':
-                actionText = 'opened a pull request on';
-                actionEmoji = '📥';
-                break;
-            case 'issues':
-                actionText = 'opened an issue on';
-                actionEmoji = '📥';
-                break;
-            case 'issue_comment':
-                actionText = 'commented on an issue on';
-                actionEmoji = '💬';
-                break;
-            case 'pull_request_review':
-                actionText = 'reviewed a pull request on';
-                actionEmoji = '📝';
-                break;
-            case 'pull_request_review_comment':
-                actionText = 'commented on a pull request on';
-                actionEmoji = '💬';
-                break;
-            case 'watch':
-                actionText = 'watched';
-                actionEmoji = '👀';
-                break;
-            case 'release':
-                actionText = 'released';
-                actionEmoji = '📦';
-                break;
-            case 'repository':
-                actionText = 'updated';
-                actionEmoji = '📝';
-                break;
-            case 'commit_comment':
-                actionText = 'commented on a commit on';
-                actionEmoji = '💬';
-                break;
-            case 'member':
-                actionText = 'added a member to';
-                actionEmoji = '👥';
-                break;
-            default:
-                actionText = 'did something on';
-                actionEmoji = '🤷';
-                break;
-        }
-        const embed = new MessageBuilder().setAuthor(sender.login, sender.avatar_url, sender.html_url).setTitle(`${actionEmoji} ${sender.login} ${actionText} ${repository.name}`).setTimestamp();
+        const { actionText, actionEmoji, description } = eventSwitch(action, payload);
+
+        const embed = new MessageBuilder().setAuthor(sender.login, sender.avatar_url, sender.html_url).setTitle(`${actionEmoji} ${sender.login} ${actionText} ${repository.name}`).setURL(`${repository.html_url}`).setDescription(description).setTimestamp();
         await hook.send(embed);
-    } catch (err) {
-        throw new Error(err);
+        await sendPayload(payload, headers);
+    } catch (error) {
+        throw new Error(error);
     }
 };
 
@@ -107,8 +39,8 @@ router.post('/', async (req, res) => {
     }
     try {
         await sendWebhook(req.body, req.headers);
-    } catch (err) {
-        sendErrorWebhook(err);
+    } catch (error) {
+        sendErrorWebhook(error);
         res.sendStatus(500);
         return;
     }

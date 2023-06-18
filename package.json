@@ -7,7 +7,7 @@
     "scripts": {
         "start": "nodemon index.ts",
         "build": "tsc",
-        "deploy": "railway up"
+        "deploy": "tsc && railway up"
     },
     "repository": {
         "type": "git",
