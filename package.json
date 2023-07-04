@@ -4,11 +4,10 @@
     "description": "My attempt to make own API.\r Using ExpressJS and Typescript.",
     "main": "dist/index.js",
     "scripts": {
-        "start": "nodemon index.ts",
+        "dev": "nodemon index.ts",
+        "start": "node index.js",
         "build": "tsc",
-        "deploy": "git push heroku",
-        "preinstall": "cd app && npm install && npm run build && cd ../",
-        "postinstall": "tsc"
+        "deploy": "git push heroku"
     },
     "repository": {
         "type": "git",
