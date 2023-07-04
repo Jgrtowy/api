@@ -6,7 +6,6 @@ import { sendErrorWebhook } from '../lib/errorWebhook.js';
 import eventSwitch from '../lib/eventSwitch.js';
 import { sendPayload } from '../lib/sendPayload.js';
 const router = express.Router();
-config();
 
 const secret: string = process.env.WEBHOOK_SECRET;
 const webhook_url: string = process.env.GITHUB_WEBHOOK;
@@ -24,7 +23,7 @@ const sendWebhook = async (payload: any, headers: any) => {
 
         const { actionText, actionEmoji, description } = eventSwitch(action, payload);
 
-        const embed = new MessageBuilder().setAuthor(sender.login, sender.avatar_url, sender.html_url).setTitle(`${actionEmoji} ${sender.login} ${actionText} ${repository.name}`).setURL(`${repository.html_url}`).setDescription(description).setTimestamp();
+        const embed = new MessageBuilder().setAuthor(sender.login, sender.avatar_url, sender.html_url).setTitle(`${actionEmoji} ${sender.login} ${actionText} ${repository.name}`).setUrl(`${repository.html_url}`).setDescription(description).setTimestamp();
         await hook.send(embed);
         await sendPayload(payload, headers);
     } catch (error) {

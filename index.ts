@@ -1,9 +1,7 @@
 import cors from 'cors';
-import dotenv from 'dotenv';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import admin from 'firebase-admin';
-dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());

@@ -3,7 +3,6 @@ import { config } from 'dotenv';
 import express from 'express';
 import { sendErrorWebhook } from '../lib/errorWebhook.js';
 const router = express.Router();
-config();
 
 router.post('/', async (req, res) => {
     if (req.query?.key !== process.env.NETLIFY_KEY) return res.status(401).json({ error: 'Invalid key' });
@@ -26,11 +25,11 @@ router.post('/', async (req, res) => {
         const color = () => {
             switch (eventType) {
                 case 'deploy-building':
-                    return '#ff3482';
+                    return 0xff3482;
                 case 'deploy-success':
-                    return '#00ff00';
+                    return 0x00ff00;
                 case 'deploy-failed':
-                    return '#ff0000';
+                    return 0xff0000;
             }
         };
         console.log(payload);
@@ -41,7 +40,7 @@ router.post('/', async (req, res) => {
             .addField('Branch', payload.branch)
             .addField('Repo', commit.replace(/\/commit\/[a-z0-9]+$/i, ''))
             .addField('Commit message', payload.title)
-            .setURL(payload.commit_url)
+            .setUrl(payload.commit_url)
             .setColor(color())
             .setTimestamp();
         await hook.send(embed);

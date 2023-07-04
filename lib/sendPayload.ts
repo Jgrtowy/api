@@ -2,7 +2,6 @@ import { MessageBuilder, Webhook } from 'discord-webhook-node';
 import { config } from 'dotenv';
 import { firestore } from '../index.js';
 import { sendErrorWebhook } from './errorWebhook.js';
-config();
 
 export const sendPayload = async (payload: any, headers: any) => {
     const url: string = process.env.PAYLOAD_WEBHOOK;
@@ -14,7 +13,7 @@ export const sendPayload = async (payload: any, headers: any) => {
         await docRef.set(data);
 
         // Send a webhook to Discord
-        const payloadEmbed = new MessageBuilder().setAuthor(payload.sender.login, payload.sender.avatar_url, payload.sender.html_url).setDescription(`Payload from ${payload.sender.login} with id: ${docRef.id}`).setColor('#00ff00').setTimestamp();
+        const payloadEmbed = new MessageBuilder().setAuthor(payload.sender.login, payload.sender.avatar_url, payload.sender.html_url).setDescription(`Payload from ${payload.sender.login} with id: ${docRef.id}`).setColor(0x00ff00).setTimestamp();
         await hook.send(payloadEmbed);
     } catch (error) {
         console.error('Error:', error);
