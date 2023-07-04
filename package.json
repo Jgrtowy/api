@@ -6,7 +6,9 @@
     "scripts": {
         "start": "nodemon index.ts",
         "build": "tsc",
-        "deploy": "tsc && railway up"
+        "deploy": "git push heroku",
+        "preinstall": "cd app && npm install && npm run build && cd ../",
+        "postinstall": "tsc"
     },
     "repository": {
         "type": "git",
