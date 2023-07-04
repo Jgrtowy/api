@@ -1,7 +1,7 @@
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 import { config } from 'dotenv';
-import { firestore } from '../index.js';
-import { sendErrorWebhook } from './errorWebhook.js';
+import { firestore } from '../index.ts';
+import { sendErrorWebhook } from './errorWebhook.ts';
 
 export const sendPayload = async (payload: any, headers: any) => {
     const url: string = process.env.PAYLOAD_WEBHOOK;

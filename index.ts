@@ -1,10 +1,12 @@
 import cors from 'cors';
+import { config } from 'dotenv';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import admin from 'firebase-admin';
 const app = express();
 app.use(express.json());
 app.use(cors());
+config();
 
 const serviceAccount = {
     privateKey: process.env.FIRESTORE_PRIVATE_KEY,
@@ -28,12 +30,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-import { assert } from 'console';
-import github from './routes/github.js';
-import netlify from './routes/netlify.js';
-import rcon from './routes/rcon.js';
-import root from './routes/root.js';
-import status from './routes/status.js';
+import github from './routes/github.ts';
+import netlify from './routes/netlify.ts';
+import rcon from './routes/rcon.ts';
+import root from './routes/root.ts';
+import status from './routes/status.ts';
 app.use('/', root);
 app.use('/status', status);
 app.use('/rcon', rcon);

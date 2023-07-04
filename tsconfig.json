@@ -5,7 +5,9 @@
         "sourceMap": true,
         "outDir": "dist",
         "esModuleInterop": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "noEmit": true,
+        "allowImportingTsExtensions": true
     },
     "include": ["**/*"],
     "ts-node": {

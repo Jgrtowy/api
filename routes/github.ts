@@ -2,9 +2,9 @@ import * as crypto from 'crypto';
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 import { config } from 'dotenv';
 import express from 'express';
-import { sendErrorWebhook } from '../lib/errorWebhook.js';
-import eventSwitch from '../lib/eventSwitch.js';
-import { sendPayload } from '../lib/sendPayload.js';
+import { sendErrorWebhook } from '../lib/errorWebhook.ts';
+import eventSwitch from '../lib/eventSwitch.ts';
+import { sendPayload } from '../lib/sendPayload.ts';
 const router = express.Router();
 
 const secret: string = process.env.WEBHOOK_SECRET;

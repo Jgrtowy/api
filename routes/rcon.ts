@@ -1,7 +1,7 @@
 import express from 'express';
 import { send } from 'process';
 import { Rcon } from 'rcon-client';
-import { sendErrorWebhook } from '../lib/errorWebhook.js';
+import { sendErrorWebhook } from '../lib/errorWebhook.ts';
 const router = express.Router();
 
 router.post('/', async (req, res) => {
