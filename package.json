@@ -2,7 +2,7 @@
     "name": "jgrtowyapi",
     "version": "1.0.0",
     "description": "My attempt to make own API.\r Using ExpressJS and Typescript.",
-    "main": "index.js",
+    "main": "dist/index.js",
     "type": "module",
     "scripts": {
         "start": "nodemon index.ts",
@@ -29,7 +29,11 @@
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
         "express-rate-limit": "^6.7.0",
+        "firebase": "^9.23.0",
+        "firebase-admin": "^11.9.0",
+        "node-fetch": "^3.3.1",
         "rcon-client": "^4.2.3",
+        "tsx": "^3.12.7",
         "ws": "^8.13.0"
     },
     "devDependencies": {
