@@ -40,7 +40,6 @@ router.post('/', async (req, res) => {
             .addField('Branch', payload.branch)
             .addField('Repo', commit.replace(/\/commit\/[a-z0-9]+$/i, ''))
             .addField('Commit message', payload.title)
-            .setUrl(payload.commit_url)
             .setColor(color())
             .setTimestamp();
         await hook.send(embed);

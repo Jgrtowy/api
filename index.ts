@@ -9,7 +9,7 @@ app.use(cors());
 config();
 
 const serviceAccount = {
-    privateKey: process.env.FIRESTORE_PRIVATE_KEY.replace(/\\n/g, ''),
+    privateKey: process.env.FIRESTORE_PRIVATE_KEY.split(String.raw`\n`).join('\n'),
     clientEmail: process.env.FIRESTORE_EMAIL,
     projectId: 'githubwebhooksstorage',
 } satisfies admin.ServiceAccount;
