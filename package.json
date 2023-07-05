@@ -5,10 +5,9 @@
     "main": "dist/index.js",
     "scripts": {
         "dev": "nodemon index.ts",
-        "preinstall": "npm install && npm run build && cd ./dist && node index.js",
-        "start": "node dist/index.js",
-        "build": "tsc",
-        "deploy": "git push heroku"
+        "postinstall": "tsc",
+        "deploy": "git add . && git commit -m Heroku && git push heroku master",
+        "start": "node dist/index.js"
     },
     "repository": {
         "type": "git",
