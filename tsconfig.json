@@ -3,11 +3,9 @@
         "module": "CommonJS",
         "target": "ESNext",
         "sourceMap": true,
-        "outDir": "./dist",
+        "outDir": "dist",
         "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "noEmit": true,
-        "allowImportingTsExtensions": true
+        "resolveJsonModule": true
     },
     "include": ["**/*"],
     "ts-node": {

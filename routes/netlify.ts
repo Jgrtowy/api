@@ -1,7 +1,7 @@
 import { MessageBuilder, Webhook } from 'discord-webhook-node';
 import { config } from 'dotenv';
 import express from 'express';
-import { sendErrorWebhook } from '../lib/errorWebhook.ts';
+import { sendErrorWebhook } from '../lib/errorWebhook';
 const router = express.Router();
 
 router.post('/', async (req, res) => {

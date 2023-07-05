@@ -30,11 +30,11 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-import github from './routes/github.ts';
-import netlify from './routes/netlify.ts';
-import rcon from './routes/rcon.ts';
-import root from './routes/root.ts';
-import status from './routes/status.ts';
+import github from './routes/github';
+import netlify from './routes/netlify';
+import rcon from './routes/rcon';
+import root from './routes/root';
+import status from './routes/status';
 app.use('/', root);
 app.use('/status', status);
 app.use('/rcon', rcon);
