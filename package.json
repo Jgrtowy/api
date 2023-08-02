@@ -2,16 +2,16 @@
     "name": "jgrtowyapi",
     "version": "1.0.0",
     "description": "My attempt to make own API.\r Using ExpressJS and Typescript.",
-    "main": "index.ts",
+    "main": "dist/index.js",
     "scripts": {
         "dev": "nodemon index.ts",
         "postinstall": "tsc",
-        "deploy": "git add . && git commit -m Heroku && git push heroku master",
+        "commit": "git commit -am && git push -f",
         "start": "node dist/index.js"
     },
     "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jgrtowy/JgrtowyAPI.git"
+        "type": "github",
+        "url": "https://github.com/jgrtowy/JgrtowyAPI.git"
     },
     "keywords": [],
     "author": "Dawid Gul",

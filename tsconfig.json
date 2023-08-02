@@ -4,8 +4,7 @@
         "target": "ESNext",
         "sourceMap": true,
         "outDir": "dist",
-        "esModuleInterop": true,
-        "resolveJsonModule": true
+        "esModuleInterop": true
     },
     "include": ["**/*"],
     "ts-node": {

@@ -11,7 +11,6 @@ export const sendPayload = async (payload: any, headers: any) => {
         const data = { payload, headers };
         const docRef = firestore.collection(payload.sender.login).doc();
         await docRef.set(data);
-
         // Send a webhook to Discord
         const payloadEmbed = new MessageBuilder().setAuthor(payload.sender.login, payload.sender.avatar_url, payload.sender.html_url).setDescription(`Payload from ${payload.sender.login} with id: ${docRef.id}`).setColor(0x00ff00).setTimestamp();
         await hook.send(payloadEmbed);

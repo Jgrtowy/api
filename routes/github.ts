@@ -25,8 +25,9 @@ const sendWebhook = async (payload: any, headers: any) => {
 
         const embed = new MessageBuilder().setAuthor(sender.login, sender.avatar_url, sender.html_url).setTitle(`${actionEmoji} ${sender.login} ${actionText} ${repository.name}`).setDescription(description).setTimestamp();
         await hook.send(embed);
-        await sendPayload(payload, headers);
+        if (process.env?.DEV !== 'dev') await sendPayload(payload, headers);
     } catch (error) {
+        console.log(error);
         throw new Error(error);
     }
 };

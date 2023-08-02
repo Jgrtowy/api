@@ -5,12 +5,11 @@ export default function eventSwitch(action: string, payload: any) {
         }
         return { actionText: 'starred', actionEmoji: '⭐' };
     }
-
     const actionMap = {
         create: { actionText: 'created', actionEmoji: '📝' },
         delete: { actionText: 'deleted', actionEmoji: '🗑️' },
         fork: { actionText: 'forked', actionEmoji: '🍴' },
-        push: { actionText: 'pushed to', actionEmoji: '📤' },
+        push: { actionText: 'pushed to', actionEmoji: '📤', description: `${payload?.commits?.message}` },
         pull_request: { actionText: 'opened a pull request on', actionEmoji: '📥', description: `#${payload?.pullRequestNumber} ${payload?.pullRequestTitle}` },
         issues: { actionText: 'opened an issue on', actionEmoji: '📥', description: `#${payload?.issueId} ${payload?.issueTitle}` },
         issue_comment: { actionText: 'commented on an issue on', actionEmoji: '💬', description: `#${payload?.issueId} ${payload?.issueTitle}` },
