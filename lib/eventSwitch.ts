@@ -9,7 +9,7 @@ export default function eventSwitch(action: string, payload: any) {
         create: { actionText: 'created', actionEmoji: '📝' },
         delete: { actionText: 'deleted', actionEmoji: '🗑️' },
         fork: { actionText: 'forked', actionEmoji: '🍴' },
-        push: { actionText: 'pushed to', actionEmoji: '📤', description: `${payload?.commits?.message}` },
+        push: { actionText: 'pushed to', actionEmoji: '📤', description: `${payload?.commits?.message || payload?.commits[0]?.message}` },
         pull_request: { actionText: 'opened a pull request on', actionEmoji: '📥', description: `#${payload?.pullRequestNumber} ${payload?.pullRequestTitle}` },
         issues: { actionText: 'opened an issue on', actionEmoji: '📥', description: `#${payload?.issueId} ${payload?.issueTitle}` },
         issue_comment: { actionText: 'commented on an issue on', actionEmoji: '💬', description: `#${payload?.issueId} ${payload?.issueTitle}` },
